@@ -2,6 +2,8 @@
 
 A Chrome extension that generates placeholder photos from [Lorem Picsum](https://picsum.photos/) at an exact size, previews them, and downloads the ones you like.
 
+<p align="center"><img src="docs/screenshot.png" alt="Picsum Frame popup: a 16:9 photo on an artboard with 1,280 × 720 redlines, New photo and Download buttons, ratio presets, Small/Medium/Large sizes, and grayscale, blur and format controls" width="392"></p>
+
 ## Install
 
 1. Open `chrome://extensions`.
@@ -27,6 +29,7 @@ No build step: the extension loads plain ES modules straight from `src/`.
 ```
 manifest.json              Manifest V3 config (downloads, storage; hosts: picsum.photos)
 assets/icons/              Toolbar icons (generated)
+docs/screenshot.png        README screenshot
 src/
   lib/                     Framework-free logic, unit-tested in Node
     picsum.js              Picsum URLs, fetchPhoto (with id → random fallback), photo info
