@@ -1,0 +1,25 @@
+/* Credit line and the New photo / Copy link / Download row. */
+
+.actions {
+  padding: 9px 14px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.credit {
+  margin: 0 0 7px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.credit a { color: var(--text); text-decoration: none; }
+.credit a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+.action-row { display: flex; gap: 8px; }
+.action-row .btn { height: 40px; }
+.action-row .btn-icon { width: 40px; }
+.action-row .btn-secondary { flex: none; }
+.action-row .btn-primary { min-width: 0; justify-content: flex-start; padding: 0 14px; }

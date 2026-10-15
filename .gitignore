@@ -1,0 +1,16 @@
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Local design-tool cache
+.impeccable/
+
+# Packaged extension builds
+*.zip
+*.crx
+*.pem

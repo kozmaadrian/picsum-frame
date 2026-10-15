@@ -1,0 +1,15 @@
+{
+  "name": "picsum-frame",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension: placeholder photos from Lorem Picsum at exact sizes and ratios.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "icons": "node scripts/generate-icons.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

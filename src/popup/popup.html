@@ -1,0 +1,127 @@
+<!doctype html>
+<!--
+THESIS: The popup is a design-tool artboard, not a form with a thumbnail. The preview is a frame
+with redline measurements, and the size controls drive it directly. It avoids the generic stacked
+form with a gallery thumbnail.
+OWN-WORLD: Graphite canvas with a dot grid, one redline orange (#FF5B45) used only for
+measurements and the primary action. System UI type with tabular figures. Ratio chips draw their
+own shape.
+STORY: Pick a ratio, see the frame reshape, see the photo develop in place, refresh until it fits
+the mockup, download the exact file.
+FIRST VIEWPORT: The artboard takes the top ~40% with W/H redlines. Credit, New photo, Copy link,
+and Download sit right under it. Ratio presets, then size (S/M/L + exact W/H), then effects.
+FORM: Artboard + redline spec (rank 1 of 5, from designer tool grammar). Staging: morphing frame.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Picsum Frame</title>
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/buttons.css" />
+    <link rel="stylesheet" href="styles/stage.css" />
+    <link rel="stylesheet" href="styles/photo-actions.css" />
+    <link rel="stylesheet" href="styles/controls.css" />
+    <link rel="stylesheet" href="styles/presets.css" />
+    <link rel="stylesheet" href="styles/segmented.css" />
+    <link rel="stylesheet" href="styles/effects.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <section class="stage" id="stage" aria-label="Preview">
+        <div class="board" id="board">
+          <p class="frame-name" id="frameName">picsum</p>
+          <div class="artboard is-empty" id="artboard">
+            <div class="develop-bar" aria-hidden="true"></div>
+            <div class="stage-msg" id="stageMsg" hidden>
+              <p id="stageMsgText"></p>
+              <button type="button" class="btn btn-ghost" id="retryBtn">Try again</button>
+            </div>
+          </div>
+          <div class="redline redline-x" aria-hidden="true"><span id="rlW">0</span></div>
+          <div class="redline redline-y" aria-hidden="true"><span id="rlH">0</span></div>
+        </div>
+      </section>
+
+      <section class="actions" aria-label="Photo actions">
+        <p class="credit" id="credit">&nbsp;</p>
+        <div class="action-row">
+          <button type="button" class="btn btn-secondary" id="refreshBtn" aria-keyshortcuts="R" title="New photo (R)">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.2 7.5A6.5 6.5 0 1 0 16.5 12" /><path d="M16.6 3.6v4.2h-4.2" /></svg>
+            New photo
+          </button>
+          <button type="button" class="btn btn-icon" id="copyBtn" aria-keyshortcuts="C" title="Copy image link (C)" disabled>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="7" y="7" width="9.5" height="9.5" rx="1.8" /><path d="M13 4.8v-.3a1.5 1.5 0 0 0-1.5-1.5H5A1.5 1.5 0 0 0 3.5 4.5V11A1.5 1.5 0 0 0 5 12.5h.3" /></svg>
+            <span class="sr-only" id="copyLabel">Copy image link</span>
+          </button>
+          <button type="button" class="btn btn-primary" id="downloadBtn" aria-keyshortcuts="D" title="Download (D)" disabled>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10" /><path d="m5.5 8.8 4.5 4.5 4.5-4.5" /><path d="M4 16.5h12" /></svg>
+            <span class="btn-text"><span>Download</span><span class="btn-meta" id="downloadMeta"></span></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Image settings">
+        <div class="field-group">
+          <div class="group-head"><h2 id="presetHeading">Ratio presets</h2></div>
+          <div class="presets" id="presets" role="radiogroup" aria-labelledby="presetHeading"></div>
+        </div>
+
+        <div class="field-group">
+          <div class="group-head">
+            <h2 id="sizeHeading">Size</h2>
+            <div class="seg seg-tier" id="tiers" role="radiogroup" aria-label="Image size for this ratio">
+              <label><input type="radio" name="tier" value="s" /><span>Small</span></label>
+              <label><input type="radio" name="tier" value="m" /><span>Medium</span></label>
+              <label><input type="radio" name="tier" value="l" /><span>Large</span></label>
+            </div>
+            <span class="ratio-readout" id="ratioReadout" aria-live="polite"></span>
+          </div>
+          <div class="size-row" role="group" aria-labelledby="sizeHeading">
+            <label class="num">
+              <span class="num-tag">W</span>
+              <input id="w" type="number" inputmode="numeric" min="1" max="5000" step="1" aria-label="Width in pixels" aria-describedby="sizeHint" />
+              <span class="num-unit">px</span>
+            </label>
+            <button type="button" class="btn btn-icon btn-toggle" id="lockBtn" aria-pressed="true" title="Lock aspect ratio">
+              <svg class="i-locked" viewBox="0 0 20 20" aria-hidden="true"><path d="M8.3 11.7a3.5 3.5 0 0 0 5 0l2.6-2.6a3.5 3.5 0 0 0-5-5l-1 1" /><path d="M11.7 8.3a3.5 3.5 0 0 0-5 0l-2.6 2.6a3.5 3.5 0 0 0 5 5l1-1" /></svg>
+              <svg class="i-unlocked" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.3 13.6l-1.7 1.7a3.5 3.5 0 0 1-5-5l1.7-1.7" /><path d="M7.7 6.4l1.7-1.7a3.5 3.5 0 0 1 5 5l-1.7 1.7" /><path d="M4 4l2 2M14 14l2 2" /></svg>
+              <span class="sr-only">Lock aspect ratio</span>
+            </button>
+            <label class="num">
+              <span class="num-tag">H</span>
+              <input id="h" type="number" inputmode="numeric" min="1" max="5000" step="1" aria-label="Height in pixels" aria-describedby="sizeHint" />
+              <span class="num-unit">px</span>
+            </label>
+            <button type="button" class="btn btn-icon" id="swapBtn" title="Swap orientation">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3.5v13" /><path d="m3 13.5 3 3 3-3" /><path d="M14 16.5v-13" /><path d="m11 6.5 3-3 3 3" /></svg>
+              <span class="sr-only">Swap width and height</span>
+            </button>
+          </div>
+          <p class="hint" id="sizeHint" aria-live="polite"></p>
+        </div>
+
+        <div class="effects" role="group" aria-label="Effects and format">
+          <label class="switch">
+            <input type="checkbox" id="gray" />
+            <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+            <span>Grayscale</span>
+          </label>
+          <label class="blur">
+            <span>Blur</span>
+            <input type="range" id="blur" min="0" max="10" step="1" value="0" aria-describedby="blurOut" />
+            <output id="blurOut" for="blur">Off</output>
+          </label>
+          <div class="seg" role="radiogroup" aria-label="File format">
+            <label><input type="radio" name="format" value="jpg" checked /><span>JPG</span></label>
+            <label><input type="radio" name="format" value="webp" /><span>WebP</span></label>
+          </div>
+        </div>
+      </section>
+
+      <p class="sr-only" id="live" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

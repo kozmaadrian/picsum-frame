@@ -1,0 +1,55 @@
+/* Ratio preset chips. */
+.presets {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.preset {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 6px 2px 5px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--field);
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+}
+
+.preset:hover { border-color: var(--line-strong); color: var(--text); }
+
+.preset-glyph {
+  width: 28px; height: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.preset-glyph i {
+  display: block;
+  border: 1.5px solid currentColor;
+  border-radius: 1.5px;
+}
+
+.preset-ratio {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.preset-name {
+  font-size: 10.5px;
+  line-height: 1.1;
+  color: var(--faint);
+}
+
+.preset[aria-checked="true"] {
+  border-color: var(--redline);
+  background: var(--redline-soft);
+  color: var(--redline);
+}
+.preset[aria-checked="true"] .preset-name { color: var(--muted); }

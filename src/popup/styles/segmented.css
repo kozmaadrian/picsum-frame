@@ -1,0 +1,28 @@
+/* Segmented radio control (size tiers, file format). */
+
+.seg {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--field);
+}
+
+.seg label { position: relative; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+
+.seg span {
+  display: block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 550;
+  color: var(--muted);
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.seg input:checked + span { background: #3b3c41; color: var(--text); }
+.seg label:hover input:not(:checked) + span { color: var(--text); }
+
+.seg-tier { padding: 1px; }
+.seg-tier span { padding: 2px 9px; }
