@@ -1,5 +1,5 @@
 // Preview stage: the artboard sized to the target ratio, redline measurements,
-// the photo with its "develop" animation, and loading / error states.
+// the photo with its "develop" animation, loading / error states, and the drag hint.
 
 import { formatNumber } from "../../lib/format.js";
 import { byId, h } from "../dom.js";
@@ -19,16 +19,27 @@ export function mountStage(store, actions) {
   const redlineH = byId("rlH");
   const message = byId("stageMsg");
   const messageText = byId("stageMsgText");
+  const hint = byId("dragHint");
+  const hintText = byId("dragHintText");
   // Created here: an empty <img> in markup would render as a broken image.
   const image = h("img", { alt: "", decoding: "async" });
   makeDraggable(image, store);
+
+  const HINT_IDLE = hintText.textContent;
+  const setDragging = (dragging) => {
+    stage.classList.toggle("is-dragging", dragging);
+    hintText.textContent = dragging ? "Drop on an upload area or your desktop" : HINT_IDLE;
+  };
+  image.addEventListener("dragstart", (event) => setDragging(!event.defaultPrevented));
+  image.addEventListener("dragend", () => setDragging(false));
 
   byId("retryBtn").addEventListener("click", actions.retry);
 
   /** Scale the artboard to fit the stage at the target ratio. */
   function fit() {
     const { w, h } = store.get().settings;
-    const scale = Math.min((stage.clientWidth - GUTTER_X) / w, (stage.clientHeight - GUTTER_Y) / h);
+    const roomY = stage.clientHeight - GUTTER_Y - hint.offsetHeight;
+    const scale = Math.min((stage.clientWidth - GUTTER_X) / w, roomY / h);
     artboard.style.width = `${Math.max(MIN_BOARD, Math.round(w * scale))}px`;
     artboard.style.height = `${Math.max(MIN_BOARD, Math.round(h * scale))}px`;
   }
@@ -74,6 +85,7 @@ export function mountStage(store, actions) {
     (status) => {
       artboard.classList.toggle("is-loading", status === "loading");
       artboard.classList.toggle("is-error", status === "error");
+      stage.classList.toggle("has-photo", status !== "error" && !!store.get().photo);
       if (status === "loading") artboard.setAttribute("aria-busy", "true");
       else artboard.removeAttribute("aria-busy");
     },

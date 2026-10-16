@@ -1,10 +1,11 @@
-/* Preview stage: dot-grid canvas, artboard, develop animation, redlines. */
+/* Preview stage: dot-grid canvas, artboard, develop animation, redlines, drag hint. */
 
 .stage {
   position: relative;
   flex: 1 0 204px;
   min-height: 204px;
   display: grid;
+  grid-template-rows: 1fr auto;
   place-items: center;
   background-color: var(--canvas);
   background-image: radial-gradient(var(--canvas-dot) 1px, transparent 1.2px);
@@ -122,6 +123,50 @@
   max-width: 30ch;
   font-size: 12px;
   color: var(--text);
+}
+
+/* Drag hint: hidden (but keeping its row) until there's a photo to drag */
+.drag-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: calc(100% - 24px);
+  margin: 0 0 10px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  background: var(--panel);
+  box-shadow: 0 0 0 1px var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 16px;
+  transition: color 160ms ease, box-shadow 160ms ease, opacity 200ms ease;
+}
+
+.drag-hint span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drag-hint svg {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stage:not(.has-photo) .drag-hint {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.stage.is-dragging .drag-hint {
+  color: var(--redline);
+  box-shadow: 0 0 0 1px var(--redline);
 }
 
 /* Redlines */
