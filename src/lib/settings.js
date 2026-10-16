@@ -1,4 +1,4 @@
-// Persisted popup settings: chrome.storage.local in the extension, localStorage as a plain page.
+// Persisted panel settings: chrome.storage.local in the extension, localStorage as a plain page.
 
 import { FORMATS } from "./picsum.js";
 import { TIERS, isValidDimension } from "./ratios.js";
@@ -13,7 +13,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   grayscale: false,
   blur: 0,
   format: "jpg",
-  /** Current Picsum photo id; kept so reopening the popup shows the same photo. */
+  /** Current Picsum photo id; kept so reopening the panel shows the same photo. */
   id: null,
 });
 
@@ -59,7 +59,7 @@ export async function loadSettings() {
   }
 }
 
-/** Best-effort; a failed save only means the popup starts fresh next time. */
+/** Best-effort; a failed save only means the panel starts fresh next time. */
 export function saveSettings(settings) {
   try {
     const storage = chromeStorage();

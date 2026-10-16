@@ -1,4 +1,4 @@
-// Tiny observable state container for the popup.
+// Tiny observable state container for the side panel.
 
 const shallowEqual = (a, b) =>
   Array.isArray(a) && Array.isArray(b)

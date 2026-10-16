@@ -4,13 +4,27 @@
 
 html, body {
   margin: 0;
-  background: var(--panel);
+  background: var(--canvas);
   color: var(--text);
   font: 13px/1.4 var(--font);
   -webkit-font-smoothing: antialiased;
 }
 
-body { width: 392px; }
+html, body { height: 100%; }
+
+/* Chrome lets the user widen the side panel and extensions can't stop it, so the
+   app stays at 360px (Chrome's narrowest side panel) and centers on the canvas.
+   The stage takes whatever height the controls leave over. */
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 360px;
+  min-height: 100%;
+  margin-inline: auto;
+  background: var(--panel);
+  box-shadow: -1px 0 var(--line), 1px 0 var(--line);
+}
 
 .sr-only {
   position: absolute;

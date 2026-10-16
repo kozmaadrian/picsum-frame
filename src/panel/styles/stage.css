@@ -2,7 +2,8 @@
 
 .stage {
   position: relative;
-  height: 204px;
+  flex: 1 0 204px;
+  min-height: 204px;
   display: grid;
   place-items: center;
   background-color: var(--canvas);
@@ -42,6 +43,8 @@
   box-shadow: 0 1px 2px var(--shadow-near), 0 8px 24px -6px var(--shadow-far);
   transition: width 420ms var(--ease-out), height 420ms var(--ease-out);
 }
+
+.artboard.is-resizing { transition: none; }
 
 .artboard.is-empty,
 .artboard.is-error {

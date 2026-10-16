@@ -1,4 +1,4 @@
-// Popup entry point: load settings, create the store, mount each part of the UI.
+// Side panel entry point: load settings, create the store, mount each part of the UI.
 
 import { loadSettings, saveSettings } from "../lib/settings.js";
 import { createAnnouncer } from "./announce.js";

@@ -29,3 +29,14 @@
 .action-row .btn-icon { width: 40px; }
 .action-row .btn-secondary { flex: none; }
 .action-row .btn-primary { min-width: 0; justify-content: flex-start; padding: 0 14px; }
+
+/* Panels narrower than Chrome's 360px minimum (older versions allowed 320px):
+   tighten so the Download size/format line still fits. */
+@media (max-width: 359px) {
+  .actions { padding-inline: 12px; }
+  .action-row { gap: 6px; }
+  .action-row .btn { gap: 5px; }
+  .action-row .btn-icon { width: 36px; }
+  .action-row .btn-secondary { padding: 0 9px; }
+  .action-row .btn-primary { padding: 0 9px; }
+}

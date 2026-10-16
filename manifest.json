@@ -4,8 +4,8 @@
   "short_name": "Picsum Frame",
   "version": "1.0.0",
   "description": "Generate placeholder photos from Lorem Picsum at exact sizes and ratios, preview them, and download the ones you like.",
+  "minimum_chrome_version": "116",
   "action": {
-    "default_popup": "src/popup/popup.html",
     "default_title": "Picsum Frame",
     "default_icon": {
       "16": "assets/icons/icon-16.png",
@@ -14,17 +14,21 @@
       "128": "assets/icons/icon-128.png"
     }
   },
+  "side_panel": {
+    "default_path": "src/panel/panel.html"
+  },
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
   "icons": {
     "16": "assets/icons/icon-16.png",
     "32": "assets/icons/icon-32.png",
     "48": "assets/icons/icon-48.png",
     "128": "assets/icons/icon-128.png"
   },
-  "permissions": ["downloads", "storage"],
-  "host_permissions": [
-    "https://picsum.photos/*",
-    "https://fastly.picsum.photos/*"
-  ],
+  "permissions": ["downloads", "sidePanel", "storage"],
+  "host_permissions": ["https://picsum.photos/*", "https://fastly.picsum.photos/*"],
   "commands": {
     "_execute_action": {
       "suggested_key": {

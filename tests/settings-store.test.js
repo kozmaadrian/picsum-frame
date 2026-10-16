@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { DEFAULT_SETTINGS, normalizeSettings } from "../src/lib/settings.js";
-import { createStore } from "../src/popup/store.js";
+import { createStore } from "../src/panel/store.js";
 
 test("normalizeSettings falls back to defaults for missing or bad data", () => {
   assert.deepEqual(normalizeSettings(null), DEFAULT_SETTINGS);

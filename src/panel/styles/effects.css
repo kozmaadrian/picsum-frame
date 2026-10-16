@@ -1,9 +1,11 @@
-/* Grayscale switch, blur slider, effects row. */
+/* Grayscale switch, blur slider, file format: one row at the 360px panel width
+   (wraps the format only on narrower, older side panels). */
 .effects {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   padding-top: 10px;
   border-top: 1px solid var(--line);
 }
@@ -39,11 +41,16 @@
 .switch input:checked + .switch-track { background: var(--redline-fill); }
 .switch input:checked + .switch-track .switch-thumb { transform: translateX(10px); background: var(--redline-ink); }
 
+.blur { gap: 6px; }
+
 .blur input[type="range"] {
-  width: 74px;
+  width: 56px;
   accent-color: var(--redline);
   margin: 0;
 }
+
+/* Stays right-aligned when a narrow panel wraps it onto its own line. */
+.effects .seg { margin-left: auto; }
 
 .blur output {
   width: 22px;

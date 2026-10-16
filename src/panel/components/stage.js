@@ -23,16 +23,31 @@ export function mountStage(store, actions) {
 
   byId("retryBtn").addEventListener("click", actions.retry);
 
+  /** Scale the artboard to fit the stage at the target ratio. */
+  function fit() {
+    const { w, h } = store.get().settings;
+    const scale = Math.min((stage.clientWidth - GUTTER_X) / w, (stage.clientHeight - GUTTER_Y) / h);
+    artboard.style.width = `${Math.max(MIN_BOARD, Math.round(w * scale))}px`;
+    artboard.style.height = `${Math.max(MIN_BOARD, Math.round(h * scale))}px`;
+  }
+
   store.watch(
     (s) => [s.settings.w, s.settings.h],
     ([w, h]) => {
-      const scale = Math.min((stage.clientWidth - GUTTER_X) / w, (stage.clientHeight - GUTTER_Y) / h);
-      artboard.style.width = `${Math.max(MIN_BOARD, Math.round(w * scale))}px`;
-      artboard.style.height = `${Math.max(MIN_BOARD, Math.round(h * scale))}px`;
+      fit();
       redlineW.textContent = formatNumber(w);
       redlineH.textContent = formatNumber(h);
     },
   );
+
+  // The side panel is resizable; refit without the morph animation.
+  let settled = null;
+  new ResizeObserver(() => {
+    artboard.classList.add("is-resizing");
+    fit();
+    cancelAnimationFrame(settled);
+    settled = requestAnimationFrame(() => artboard.classList.remove("is-resizing"));
+  }).observe(stage);
 
   store.watch(
     (s) => s.photo,
