@@ -7,6 +7,7 @@ import { mountPhotoActions } from "./components/photo-actions.js";
 import { mountPresetPicker } from "./components/preset-picker.js";
 import { mountSizeControls } from "./components/size-controls.js";
 import { mountStage } from "./components/stage.js";
+import { mountThemeToggle } from "./components/theme-toggle.js";
 import { byId } from "./dom.js";
 import { createPhotoLoader } from "./photo-loader.js";
 import { createStore } from "./store.js";
@@ -49,5 +50,6 @@ mountPhotoActions(store, actions);
 mountPresetPicker(store, actions);
 mountSizeControls(store, actions);
 mountEffectsControls(store, actions);
+mountThemeToggle(actions);
 
 loader.load();

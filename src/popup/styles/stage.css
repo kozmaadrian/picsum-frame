@@ -37,17 +37,17 @@
   position: relative;
   width: 200px;
   height: 120px;
-  background: #0f1011;
+  background: var(--board);
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px -6px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 1px 2px var(--shadow-near), 0 8px 24px -6px var(--shadow-far);
   transition: width 420ms var(--ease-out), height 420ms var(--ease-out);
 }
 
 .artboard.is-empty,
 .artboard.is-error {
   background:
-    repeating-linear-gradient(135deg, transparent 0 7px, rgba(255, 255, 255, 0.045) 7px 8px),
-    #17181a;
+    repeating-linear-gradient(135deg, transparent 0 7px, var(--board-hatch) 7px 8px),
+    var(--board-empty);
 }
 
 .artboard img {
@@ -106,7 +106,7 @@
   gap: 8px;
   padding: 12px;
   text-align: center;
-  background: rgba(23, 24, 26, 0.86);
+  background: var(--scrim);
 }
 
 .stage-msg[hidden] { display: none; }
@@ -121,7 +121,7 @@
 /* Redlines */
 .redline {
   position: absolute;
-  color: var(--redline);
+  color: var(--redline-fill);
   pointer-events: none;
 }
 
@@ -129,7 +129,7 @@
   position: absolute;
   padding: 1px 5px;
   border-radius: 3px;
-  background: var(--redline);
+  background: var(--redline-fill);
   color: var(--redline-ink);
   font-size: 10.5px;
   font-weight: 600;

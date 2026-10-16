@@ -17,6 +17,7 @@ FORM: Artboard + redline spec (rank 1 of 5, from designer tool grammar). Staging
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Picsum Frame</title>
+    <script src="theme-boot.js"></script>
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/buttons.css" />
@@ -26,6 +27,7 @@ FORM: Artboard + redline spec (rank 1 of 5, from designer tool grammar). Staging
     <link rel="stylesheet" href="styles/presets.css" />
     <link rel="stylesheet" href="styles/segmented.css" />
     <link rel="stylesheet" href="styles/effects.css" />
+    <link rel="stylesheet" href="styles/theme-toggle.css" />
     <script type="module" src="main.js"></script>
   </head>
   <body>
@@ -43,6 +45,11 @@ FORM: Artboard + redline spec (rank 1 of 5, from designer tool grammar). Staging
           <div class="redline redline-x" aria-hidden="true"><span id="rlW">0</span></div>
           <div class="redline redline-y" aria-hidden="true"><span id="rlH">0</span></div>
         </div>
+        <button type="button" class="btn btn-icon theme-toggle" id="themeBtn" title="Theme">
+          <svg class="i-system" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" /><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor" stroke="none" /></svg>
+          <svg class="i-light" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.2" /><path d="M10 2.5v1.6M10 15.9v1.6M2.5 10h1.6M15.9 10h1.6M4.7 4.7l1.1 1.1M14.2 14.2l1.1 1.1M4.7 15.3l1.1-1.1M14.2 5.8l1.1-1.1" /></svg>
+          <svg class="i-dark" viewBox="0 0 20 20" aria-hidden="true"><path d="M15.8 12.3A6.3 6.3 0 0 1 7.7 4.2a6.3 6.3 0 1 0 8.1 8.1z" /></svg>
+        </button>
       </section>
 
       <section class="actions" aria-label="Photo actions">

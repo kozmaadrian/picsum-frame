@@ -15,8 +15,14 @@
   font-variant-numeric: tabular-nums;
 }
 
-.credit a { color: var(--text); text-decoration: none; }
-.credit a:hover { text-decoration: underline; text-underline-offset: 2px; }
+/* Always underlined: color alone doesn't set the link apart from the muted line. */
+.credit a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--faint);
+  text-underline-offset: 2px;
+}
+.credit a:hover { text-decoration-color: currentColor; }
 
 .action-row { display: flex; gap: 8px; }
 .action-row .btn { height: 40px; }

@@ -1,0 +1,21 @@
+/* Theme toggle: a quiet icon in the stage's top-right corner, clear of the redlines. */
+
+.theme-toggle {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  border-color: transparent;
+  border-radius: 5px;
+  color: var(--faint);
+}
+.theme-toggle svg { width: 15px; height: 15px; }
+
+.theme-toggle .i-light,
+.theme-toggle .i-dark { display: none; }
+.theme-toggle[data-mode="light"] .i-system,
+.theme-toggle[data-mode="dark"] .i-system { display: none; }
+.theme-toggle[data-mode="light"] .i-light,
+.theme-toggle[data-mode="dark"] .i-dark { display: block; }
