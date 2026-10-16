@@ -3,6 +3,10 @@
 A Chrome side-panel extension that generates placeholder photos from [Lorem Picsum](https://picsum.photos/) at an exact size, previews them, and lets you download the ones you like or drag them straight into a page's upload area.
 
 <p align="center">
+  <img src="docs/demo.gif" alt="Demo: clicking New photo in the Picsum Frame side panel loads a new 1,280 × 720 photo, which is then dragged into a page's Cover image upload area and shows up as picsum-719-1280x720.jpg" width="900">
+</p>
+
+<p align="center">
   <img src="docs/screenshot-light.png" alt="Picsum Frame side panel in the light theme: a 16:9 photo on an artboard with 1,280 × 720 redlines and a hint to drag it into an upload area, New photo and Download buttons, ratio presets, Small/Medium/Large sizes, and grayscale, blur and format controls" width="360">
   <img src="docs/screenshot-dark.png" alt="The same panel in the dark theme" width="360">
 </p>
