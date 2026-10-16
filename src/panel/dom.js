@@ -17,3 +17,10 @@ export function h(tag, props = {}, ...children) {
   element.append(...children);
   return element;
 }
+
+/** Resolves once `url` is loaded and decoded, so showing it won't flash. */
+export function decodeImage(url) {
+  const image = new Image();
+  image.src = url;
+  return image.decode();
+}

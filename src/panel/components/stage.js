@@ -3,6 +3,7 @@
 
 import { formatNumber } from "../../lib/format.js";
 import { byId, h } from "../dom.js";
+import { makeDraggable } from "./photo-drag.js";
 
 const MIN_BOARD = 18;
 /** Room around the artboard for the height redline and side margins. */
@@ -20,6 +21,7 @@ export function mountStage(store, actions) {
   const messageText = byId("stageMsgText");
   // Created here: an empty <img> in markup would render as a broken image.
   const image = h("img", { alt: "", decoding: "async" });
+  makeDraggable(image, store);
 
   byId("retryBtn").addEventListener("click", actions.retry);
 
@@ -57,7 +59,7 @@ export function mountStage(store, actions) {
         return;
       }
       if (!image.isConnected) artboard.prepend(image);
-      image.src = photo.url;
+      image.src = photo.dragUrl ?? photo.url;
       image.alt = `Placeholder photo #${photo.id}, ${photo.w} by ${photo.h} pixels`;
       image.classList.remove("developing");
       void image.offsetWidth; // restart the develop animation

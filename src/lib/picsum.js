@@ -7,8 +7,8 @@ export const PICSUM_ORIGIN = "https://picsum.photos";
 export const MAX_SIZE = 5000;
 
 export const FORMATS = Object.freeze({
-  jpg: Object.freeze({ ext: "jpg", label: "JPG" }),
-  webp: Object.freeze({ ext: "webp", label: "WebP" }),
+  jpg: Object.freeze({ ext: "jpg", label: "JPG", mime: "image/jpeg" }),
+  webp: Object.freeze({ ext: "webp", label: "WebP", mime: "image/webp" }),
 });
 
 export class PicsumError extends Error {
