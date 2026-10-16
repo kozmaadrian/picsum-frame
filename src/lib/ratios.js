@@ -61,6 +61,17 @@ export function tierOf(w, h) {
   );
 }
 
+/**
+ * [w, h, ratio] flipped to the other orientation. A tier size stays on its tier (16:9 Medium →
+ * 9:16 Medium), since flipped presets don't always share sizes; a custom size is swapped exactly.
+ * Pass the exact `ratio` when known: rounded pixels alone can drift off a preset (213×640 ≠ 1:3).
+ */
+export function swapOrientation(w, h, ratio = w / h) {
+  const flipped = 1 / ratio;
+  const tier = tierOf(w, h);
+  return tier ? [...sizeForTier(tier, flipped, 1), flipped] : [h, w, flipped];
+}
+
 const gcd = (a, b) => (b ? gcd(b, a % b) : a);
 
 /** "16:9" for presets, a reduced fraction for simple ratios, else "1.85:1". */

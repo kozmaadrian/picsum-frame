@@ -2,7 +2,35 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { MAX_SIZE } from "../src/lib/picsum.js";
-import { PRESETS, findPreset, isValidDimension, ratioLabel, sizeForTier, tierOf } from "../src/lib/ratios.js";
+import {
+  PRESETS,
+  TIERS,
+  findPreset,
+  isValidDimension,
+  presetSize,
+  ratioLabel,
+  sizeForTier,
+  swapOrientation,
+  tierOf,
+} from "../src/lib/ratios.js";
+
+test("swapOrientation keeps the size tier and round-trips", () => {
+  assert.deepEqual(swapOrientation(1280, 720, 16 / 9).slice(0, 2), [1080, 1920]); // 16:9 Medium → 9:16 Medium
+  assert.deepEqual(swapOrientation(1080, 1920, 9 / 16).slice(0, 2), [1280, 720]);
+  for (const preset of PRESETS) {
+    for (const tier of TIERS) {
+      const [w, h] = presetSize(preset, tier);
+      const [sw, sh, flipped] = swapOrientation(w, h, preset.ratio);
+      assert.equal(tierOf(sw, sh), tier, `${preset.label} ${tier} → ${sw}×${sh}`);
+      assert.equal(Math.sign(sw - sh), Math.sign(h - w), `${preset.label} ${tier} flips orientation`);
+      assert.deepEqual(swapOrientation(sw, sh, flipped).slice(0, 2), [w, h], `${preset.label} ${tier} round-trips`);
+    }
+  }
+});
+
+test("swapOrientation swaps custom sizes exactly", () => {
+  assert.deepEqual(swapOrientation(1000, 700), [700, 1000, 0.7]);
+});
 
 test("every preset's sizes share one ratio", () => {
   for (const preset of PRESETS) {

@@ -3,7 +3,7 @@
 
 import { formatDims, formatNumber } from "../../lib/format.js";
 import { MAX_SIZE } from "../../lib/picsum.js";
-import { TIER_NAMES, isValidDimension, ratioLabel, sizeForTier, tierOf } from "../../lib/ratios.js";
+import { TIER_NAMES, isValidDimension, ratioLabel, sizeForTier, swapOrientation, tierOf } from "../../lib/ratios.js";
 import { byId } from "../dom.js";
 
 const INVALID_HINT = `Use whole pixels from 1 to ${formatNumber(MAX_SIZE)}. Picsum doesn't serve larger images.`;
@@ -76,8 +76,9 @@ export function mountSizeControls(store, actions) {
 
   swapBtn.addEventListener("click", () => {
     if (!showValidity()) return;
-    const { w, h } = store.get().settings;
-    actions.updateSettings({ w: h, h: w, ratio: h / w }, { reload: "now" });
+    const { w, h, ratio } = store.get().settings;
+    const [sw, sh, flipped] = swapOrientation(w, h, ratio);
+    actions.updateSettings({ w: sw, h: sh, ratio: flipped }, { reload: "now" });
   });
 
   for (const input of tierInputs) {
